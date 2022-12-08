@@ -1,0 +1,43 @@
+version: "3.9"
+services:
+  
+  blockchain:
+    build:
+      context: ./blockchain
+    image: blockchain
+    ports:
+      - "5000:5000"
+    container_name: blockchain
+    networks:
+      vpcbr:
+        ipv4_address: 10.5.0.7
+  
+  backend:
+    build:
+      context: ./flask-exchange
+    image: backend
+    ports:
+      - "5001:5001"
+    container_name: backend
+    networks:
+      vpcbr:
+        ipv4_address: 10.5.0.5
+  
+  fronted:
+    build: 
+      context: ./dad-exchange
+    image: frontend
+    ports:
+      - "4200:80"
+    container_name: frontend
+    networks:
+      vpcbr:
+        ipv4_address: 10.5.0.6
+
+networks:
+  vpcbr:
+    driver: bridge
+    ipam:
+     config:
+       - subnet: 10.5.0.0/16
+         gateway: 10.5.0.1
