@@ -240,6 +240,7 @@ def sign_up():
 
 
 @app.route('/beneficiaries')
+@jwt_required()
 def get_beneficiaries():
     try:
         users = []
@@ -259,6 +260,7 @@ def get_beneficiaries():
 
 
 @app.route('/tokens', methods=['POST'])
+@jwt_required()
 def buy_tokens():
     form = request.json
     token_wallet = form['token_wallet']
@@ -286,6 +288,7 @@ def buy_tokens():
 
 
 @app.route('/wallet/<public_key>/tokens', methods=['GET'])
+@jwt_required()
 def get_token_balance(public_key):
     try:
         # Lectura
@@ -302,6 +305,7 @@ def get_token_balance(public_key):
 
 
 @app.route('/balance', methods=['POST'])
+@jwt_required()
 def get_balance():
     try:
         form = request.json
