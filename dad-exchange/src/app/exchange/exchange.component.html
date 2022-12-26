@@ -1,0 +1,47 @@
+<div class="container">
+  <div class="row mt-5">
+    <div class="col-12 col-sm-4">
+      <form class="card" [formGroup]="form">
+        <div class="card-body">
+
+          <div class="col-12">
+            <label for="fromCurrency" class="form-label">Monto:</label>
+            <select class="form-control" id="fromCurrency" formControlName="fromCurrency" >
+              <option *ngFor="let item of getFromCurrency()" [value]="item">{{item | currency}}</option>
+            </select>
+          </div>
+
+          <div class="col-12">
+            <label for="amount" class="form-label">Monto:</label>
+            <input type="number" class="form-control" id="amount" formControlName="amount" min="0">
+          </div>
+
+          <div class="col-12">
+            <label for="fromCurrency" class="form-label">Monto:</label>
+            <select class="form-control" id="toCurrency" formControlName="toCurrency" >
+              <option *ngFor="let item of getToCurrency()" [value]="item">{{item | currency}}</option>
+            </select>
+          </div>
+
+          <div class="col-12">
+            <label for="receive" class="form-label">Total a recibir:</label>
+            <input type="number" class="form-control" id="receive" formControlName="receive" min="0" readonly >
+          </div>
+
+          <hr>
+          <div class="d-flex justify-content-center">
+            <button
+              type="button"
+              class="btn btn-primary"
+              [disabled]="form.invalid || form.get('amount')?.value <= 0"
+              (click)="submit()">
+              Comprar
+            </button>
+          </div>
+
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+

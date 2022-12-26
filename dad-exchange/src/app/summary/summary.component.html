@@ -1,0 +1,30 @@
+<div class="container">
+  <div class="row mt-5">
+
+    <div class="col-12 col-sm-3">
+      <div class="card">
+        <div class="card-body">
+          <h3>AURAX: {{balance.coin}}</h3>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-12 col-sm-3">
+      <div class="card">
+        <div class="card-body">
+          <h3>Tokens: {{balance.token}}</h3>
+
+        </div>
+      </div>
+    </div>
+
+
+    <div class="col-12 col-sm-12 mt-3">
+      <hr>
+      <h1>Mi billetera:</h1>
+      <label for="wallet">Llave pública:</label>
+      <br>
+      <textarea  class="form-control-lg w-100"  id="wallet" readonly [value]="jwt?.wallet_public_key"></textarea>
+    </div>
+  </div>
+</div>

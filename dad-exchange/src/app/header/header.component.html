@@ -1,0 +1,25 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+  <div class="container-fluid">
+    <a class="navbar-brand" routerLink="/balance">Navbar</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <form class="d-flex">
+        <input class="form-control me-2" type="search" name="node" placeholder="Search" aria-label="Search" [(ngModel)]="nodeService.target" sta>
+      </form>
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" routerLink="/tokens">Tokens</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link"routerLink="/exchange">Cambiar</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/transfer">Transferir</a>
+        </li>
+      </ul>
+
+    </div>
+  </div>
+</nav>
