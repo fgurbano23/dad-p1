@@ -266,11 +266,15 @@ def get_transactions():
 def get_balance(pubkey):
     public_key = str(pubkey)
     # Se recorre la cadena y se obtienen los montos enviados a la dirección pública
-    transactions_sent = [[float(tx['value']) for tx in block['transactions'] if tx['sender_address'] == public_key]
-                         for block in blockchain.chain]
+    transactions_sent = [
+        [float(tx['value']) for tx in block['transactions']
+         if tx['sender_address'] == public_key]
+        for block in blockchain.chain]
     # Se obtienen los montos enviados que aun no se han incorporado al bloque
-    open_transactions = [float(
-        tx['value']) for tx in blockchain.transactions if tx['sender_address'] == public_key]
+    open_transactions = [
+        float(
+            tx['value']) for tx in blockchain.transactions
+        if tx['sender_address'] == public_key]
     transactions_sent.append(open_transactions)
     # Se calcula el monto total enviado
     amount_sent = reduce(
@@ -278,8 +282,10 @@ def get_balance(pubkey):
         if len(tx_amt) > 0 else tx_sum + 0, transactions_sent, 0)
 
     # Se recorre la cadena y se obtienen los montos recibidos a la dirección pública
-    transactions_received = [[float(tx['value']) for tx in block['transactions'] if tx['recipient_address'] == public_key]
-                             for block in blockchain.chain]
+    transactions_received = [
+        [float(tx['value']) for tx in block['transactions']
+         if tx['recipient_address'] == public_key]
+        for block in blockchain.chain]
     # Con todos los montos de transacciones recibidas procedemos calcular
     # el monto total recibido
     amount_received = reduce(
@@ -287,7 +293,9 @@ def get_balance(pubkey):
         if len(tx_amt) > 0 else tx_sum + 0, transactions_received, 0)
 
     balance = amount_received - amount_sent
-    return jsonify(json.dumps({'balance': balance, 'amount_received': amount_received, 'amount_sent': amount_sent})), 200
+    return jsonify(json.dumps({'balance': balance,
+                               'amount_received': amount_received,
+                               'amount_sent': amount_sent})), 200
 
 
 @app.route('/chain', methods=['GET'])
