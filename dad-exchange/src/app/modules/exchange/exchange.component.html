@@ -1,15 +1,16 @@
 <div class="container">
   <div class="row mt-5">
-    <div class="mb-5">
-      <h2>Intercambio de activos</h2>
-      <p>Realiza intercambio entre tokens, AURAX y dólares</p>
-    </div>
 
     <ngb-alert type="info" [dismissible]="false" *ngIf="success">
       <strong>Operación pendiente por </strong> <a [href]="nodeService.target" target="_blank">Minar</a>
     </ngb-alert>
 
     <div class="col-12 col-sm-6">
+      <div class="mb-5">
+        <h2>Intercambio de activos</h2>
+        <p>Realiza intercambio entre tokens, AURAX y dólares</p>
+      </div>
+
       <form class="card" [formGroup]="form">
         <div class="card-body">
           <div class="col-12">
@@ -69,6 +70,10 @@
 
         </div>
       </form>
+    </div>
+
+    <div class="col-12 col-sm-6">
+      <img src="assets/illustration2.jpg" alt="image" class="img-fluid">
     </div>
   </div>
 </div>
