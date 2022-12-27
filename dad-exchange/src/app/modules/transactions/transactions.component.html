@@ -6,6 +6,10 @@
     </div>
 
     <div class="col-12 col-sm-6">
+      <ngb-alert type="info" [dismissible]="false" *ngIf="success" >
+        <strong>Operación pendiente por </strong> <a [href]="nodeService.target" target="_blank" (click)="hideAlert()">Minar</a>
+      </ngb-alert>
+
       <form class="card" [formGroup]="form">
         <div class="card-body">
 
@@ -13,7 +17,7 @@
             <label for="amount" class="form-label">Monto en AURAX:</label>
             <input type="number" class="form-control" id="amount" formControlName="amount" min="0"
                    [class.ng-invalid]="form.get('amount')?.invalid && form.get('amount')?.touched">
-            <div class="text-end" *ngIf="balance">Balance:{{balance | currency:'USD':'':'1.2-2'}}</div>
+            <div class="text-end" >Balance:{{balance | currency:'USD':'':'1.2-2'}}</div>
             <div
               class="alert alert-danger p-1 mt-1"
               *ngIf="form.get('amount')?.invalid && form.get('amount')?.touched"

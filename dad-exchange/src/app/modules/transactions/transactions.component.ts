@@ -4,6 +4,8 @@ import {AmountCurrencyService} from "../../services/amount-currency.service";
 import jwt_decode from "jwt-decode";
 import {NodeService} from "../../services/node.service";
 import {BalanceService} from "../../services/balance.service";
+import {ToastService} from "../../services/toast.service";
+import {HttpErrorResponse} from "@angular/common/http";
 
 @Component({
   selector: 'app-transactions',
@@ -14,12 +16,17 @@ export class TransactionsComponent {
   jwt: any
   form: FormGroup
   balance: any
-
+  success = false
   beneficiaryList:any = []
-  constructor(private fb: FormBuilder,
-              private amountCurrency: AmountCurrencyService,
-              public nodeService: NodeService,
-              public balanceService: BalanceService) {
+
+
+  constructor(
+    private fb: FormBuilder,
+    private amountCurrency: AmountCurrencyService,
+    public nodeService: NodeService,
+    public balanceService: BalanceService,
+    private toast: ToastService) {
+
     const userToken: string = window.localStorage.getItem('token') as string
     const jwt: any = jwt_decode(userToken)
     console.log(jwt)
@@ -28,6 +35,9 @@ export class TransactionsComponent {
       receiver: [null,  [Validators.required]],
       coin_wallet: jwt?.wallet_public_key
     })
+  }
+  hideAlert() {
+    this.success = false
   }
 
   async ngOnInit() {
@@ -62,7 +72,21 @@ export class TransactionsComponent {
         amount: this.form.get('amount')?.value
       })
       console.log(res)
+      this.success = true
+      this.toast.show('Operación exitosa',{ classname: 'bg-success text-light', delay: 10000 })
+      this.form.reset()
     } catch (e) {
+      if (e instanceof HttpErrorResponse) {
+
+        if (e.error.data){
+          this.toast.show(e.error.data,{ classname: 'bg-danger text-light', delay: 10000 })
+        } else {
+          this.toast.show('Ha ocurrido un error',{ classname: 'bg-danger text-light', delay: 10000 })
+        }
+
+      } else {
+        this.toast.show('Ha ocurrido un error',{ classname: 'bg-danger text-light', delay: 10000 })
+      }
       console.log(e)
     }
   }

@@ -24,7 +24,8 @@ export class ExchangeComponent implements OnInit{
     private amountCurrency: AmountCurrencyService,
     public nodeService: NodeService,
     private balanceService : BalanceService,
-    private toast: ToastService) {
+    private toast: ToastService
+  ) {
 
     const userToken: string = window.localStorage.getItem('token') as string
     const jwt: any = jwt_decode(userToken)
@@ -86,7 +87,10 @@ export class ExchangeComponent implements OnInit{
         if (e.error.data){
           this.toast.show(e.error.data,{ classname: 'bg-danger text-light', delay: 10000 })
         }
-        this.toast.show('Ha ocurrido un error',{ classname: 'bg-danger text-light', delay: 10000 })
+        else {
+          this.toast.show('Ha ocurrido un error',{ classname: 'bg-danger text-light', delay: 10000 })
+        }
+
       } else {
         this.toast.show('Ha ocurrido un error',{ classname: 'bg-danger text-light', delay: 10000 })
       }
@@ -102,6 +106,10 @@ export class ExchangeComponent implements OnInit{
   getToCurrency() {
     return this.currencyList.filter((item) => item != this.form.value.fromCurrency)
   }
+
+  hideAlert() {
+    this.success = false
+  }
   async submit() {
     try {
       const res = await this.amountCurrency.exchange( {
@@ -112,8 +120,28 @@ export class ExchangeComponent implements OnInit{
         coin_wallet : this.form.get('coin_wallet')?.value,
         node: this.nodeService.target
       })
-      this.success = true;
+
+      if (this.form.get('fromCurrency')?.value === 'coin' || this.form.get('toCurrency')?.value === 'coin') {
+        /*Se muestra la alerta de minar*/
+        this.success = true
+      }
+
+
+      this.toast.show('Operación exitosa',{ classname: 'bg-success text-light', delay: 10000 })
+      this.form.reset()
+
     } catch (e) {
+      if (e instanceof HttpErrorResponse) {
+
+        if (e.error.data){
+          this.toast.show(e.error.data,{ classname: 'bg-danger text-light', delay: 10000 })
+        } else {
+          this.toast.show('Ha ocurrido un error',{ classname: 'bg-danger text-light', delay: 10000 })
+        }
+
+      } else {
+        this.toast.show('Ha ocurrido un error',{ classname: 'bg-danger text-light', delay: 10000 })
+      }
       console.log(e)
     }
   }

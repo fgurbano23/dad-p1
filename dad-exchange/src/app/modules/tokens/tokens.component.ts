@@ -38,8 +38,9 @@ export class TokensComponent implements OnInit{
       if (e instanceof HttpErrorResponse) {
         if (e.error.data){
           this.toast.show(e.error.data,{ classname: 'bg-danger text-light', delay: 10000 })
+        } else {
+          this.toast.show('Ha ocurrido un error',{ classname: 'bg-danger text-light', delay: 10000 })
         }
-        this.toast.show('Ha ocurrido un error',{ classname: 'bg-danger text-light', delay: 10000 })
       } else {
         this.toast.show('Ha ocurrido un error',{ classname: 'bg-danger text-light', delay: 10000 })
       }
@@ -57,8 +58,9 @@ export class TokensComponent implements OnInit{
       if (e instanceof HttpErrorResponse) {
         if (e.error.data){
           this.toast.show(e.error.data,{ classname: 'bg-danger text-light', delay: 10000 })
+        } else {
+          this.toast.show('Ha ocurrido un error',{ classname: 'bg-danger text-light', delay: 10000 })
         }
-        this.toast.show('Ha ocurrido un error',{ classname: 'bg-danger text-light', delay: 10000 })
       } else {
         this.toast.show('Ha ocurrido un error',{ classname: 'bg-danger text-light', delay: 10000 })
       }
