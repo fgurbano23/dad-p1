@@ -85,7 +85,7 @@ def get_wallet_private_key(id):
 
 def transfer_to_user(node, sender_public_key, sender_private_key, receiver_public_key, amount, system_tx=False):
     try:
-        sender_account = requests.post('http://localhost:5001/balance', json={
+        sender_account = requests.post('http://10.5.0.5:5001/balance', json={
             'node': node,
             'coin_wallet': sender_public_key
         })
@@ -115,6 +115,11 @@ def transfer_to_user(node, sender_public_key, sender_private_key, receiver_publi
             node + '/transactions/new', data=rq)
     except Exception as e:
         raise e
+
+
+@app.route('/')
+def api():
+    return jsonify('api works')
 
 
 @app.route('/exchange-rate')
