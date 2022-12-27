@@ -17,6 +17,7 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { HeaderComponent } from './layout/header/header.component';
 import { CurrencyPipe } from './pipes/currency.pipe';
 import { FooterComponent } from './layout/footer/footer.component';
+import { ToastComponent } from './layout/toast/toast.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,9 @@ import { FooterComponent } from './layout/footer/footer.component';
     RegisterComponent,
     HeaderComponent,
     CurrencyPipe,
-    FooterComponent
+    FooterComponent,
+    ToastComponent,
+
   ],
     imports: [
         BrowserModule,

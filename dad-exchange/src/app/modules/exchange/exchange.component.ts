@@ -4,6 +4,8 @@ import {AmountCurrencyService} from "../../services/amount-currency.service";
 import jwt_decode from "jwt-decode";
 import {NodeService} from "../../services/node.service";
 import {BalanceService} from "../../services/balance.service";
+import {HttpErrorResponse} from "@angular/common/http";
+import {ToastService} from "../../services/toast.service";
 
 @Component({
   selector: 'app-exchange',
@@ -19,7 +21,10 @@ export class ExchangeComponent implements OnInit{
   currency: any
   constructor(
     private fb: FormBuilder,
-    private amountCurrency: AmountCurrencyService, public nodeService: NodeService, private balanceService : BalanceService) {
+    private amountCurrency: AmountCurrencyService,
+    public nodeService: NodeService,
+    private balanceService : BalanceService,
+    private toast: ToastService) {
 
     const userToken: string = window.localStorage.getItem('token') as string
     const jwt: any = jwt_decode(userToken)
@@ -77,6 +82,14 @@ export class ExchangeComponent implements OnInit{
       this.currencyList = Object.keys(exchangeRate);
       console.log(this.currencyList)
     } catch (e) {
+      if (e instanceof HttpErrorResponse) {
+        if (e.error.data){
+          this.toast.show(e.error.data,{ classname: 'bg-danger text-light', delay: 10000 })
+        }
+        this.toast.show('Ha ocurrido un error',{ classname: 'bg-danger text-light', delay: 10000 })
+      } else {
+        this.toast.show('Ha ocurrido un error',{ classname: 'bg-danger text-light', delay: 10000 })
+      }
       console.log(e)
     }
 
