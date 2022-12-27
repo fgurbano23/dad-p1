@@ -1,14 +1,20 @@
 <div class="container">
+
   <div class="row mt-5">
+    <ngb-alert type="info" [dismissible]="false" *ngIf="success">
+      <strong>Operación pendiente por </strong> <a [href]="nodeService.target" target="_blank">Minar</a>
+    </ngb-alert>
+
     <div class="col-12 col-sm-4">
       <form class="card" [formGroup]="form">
         <div class="card-body">
-
           <div class="col-12">
-            <label for="fromCurrency" class="form-label">Monto:</label>
+            <label for="fromCurrency" class="form-label">De:</label>
             <select class="form-control" id="fromCurrency" formControlName="fromCurrency" >
-              <option *ngFor="let item of getFromCurrency()" [value]="item">{{item | currency}}</option>
+              <option *ngFor="let item of getFromCurrency()" [value]="item">{{item | currencyName}}</option>
             </select>
+            <div class="text-end" *ngIf="form.get('fromCurrency')?.value == 'coin' ">Balance:{{balance.coin | currency:'USD':'':'1.2-2'}}</div>
+            <div class="text-end" *ngIf="form.get('fromCurrency')?.value == 'token' ">Balance:{{balance.token | currency:'USD':'':'1.2-2'}}</div>
           </div>
 
           <div class="col-12">
@@ -16,10 +22,12 @@
             <input type="number" class="form-control" id="amount" formControlName="amount" min="0">
           </div>
 
+          <hr>
+
           <div class="col-12">
-            <label for="fromCurrency" class="form-label">Monto:</label>
+            <label for="fromCurrency" class="form-label">A:</label>
             <select class="form-control" id="toCurrency" formControlName="toCurrency" >
-              <option *ngFor="let item of getToCurrency()" [value]="item">{{item | currency}}</option>
+              <option *ngFor="let item of getToCurrency()" [value]="item">{{item | currencyName}}</option>
             </select>
           </div>
 
@@ -28,8 +36,8 @@
             <input type="number" class="form-control" id="receive" formControlName="receive" min="0" readonly >
           </div>
 
-          <hr>
-          <div class="d-flex justify-content-center">
+
+          <div class="d-flex justify-content-center mt-3">
             <button
               type="button"
               class="btn btn-primary"

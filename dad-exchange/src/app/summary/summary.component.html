@@ -4,7 +4,7 @@
     <div class="col-12 col-sm-3">
       <div class="card">
         <div class="card-body">
-          <h3>AURAX: {{balance.coin}}</h3>
+          <h3>AURAX: {{balance.coin | currency:'USD':'':'1.2-2'}}</h3>
         </div>
       </div>
     </div>
@@ -12,7 +12,7 @@
     <div class="col-12 col-sm-3">
       <div class="card">
         <div class="card-body">
-          <h3>Tokens: {{balance.token}}</h3>
+          <h3>Tokens: {{balance.token | currency:'USD':'':'1.2-2'}}</h3>
 
         </div>
       </div>

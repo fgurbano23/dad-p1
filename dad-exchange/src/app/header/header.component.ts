@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import {NodeService} from "../services/node.service";
+import {LoginService} from "../services/login.service";
 
 @Component({
   selector: 'app-header',
@@ -7,6 +8,6 @@ import {NodeService} from "../services/node.service";
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent {
-    constructor(public nodeService: NodeService) {
+    constructor(public nodeService: NodeService, public loginService: LoginService) {
     }
 }

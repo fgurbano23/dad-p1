@@ -16,7 +16,7 @@ export class AmountCurrencyService {
     !targetRate) {
       return 0
     }
-    return amount *  srcRate * targetRate;
+    return amount *  targetRate / srcRate ;
   }
 
   exchangeRate() {
@@ -25,6 +25,18 @@ export class AmountCurrencyService {
 
   buyTokens(form: any) {
     return lastValueFrom(this.http.post(environment.api + `/tokens`, form ))
+  }
+
+  exchange(form: any) {
+    return lastValueFrom(this.http.post(environment.api + `/exchange`, form ))
+  }
+
+  getBeneficiaries() {
+    return lastValueFrom(this.http.get(environment.api + `/beneficiaries`))
+  }
+
+  transfer(form: any) {
+    return lastValueFrom(this.http.post(environment.api + `/transfer`, form ))
   }
 
 }
