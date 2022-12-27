@@ -1,4 +1,4 @@
-#!/home/furbano/Documentos/workspace/postgrado/distribuidas/flask-exchange/env/bin/python3
+#!/home/furbano/Documentos/workspace/postgrado/distribuidas/p1/flask-exchange/env/bin/python3
 # -*- coding: utf-8 -*-
 import re
 import sys

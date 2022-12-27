@@ -1,0 +1,54 @@
+<div class="container">
+  <div class="row mt-5">
+    <div class="col-12 col-sm-6">
+      <div class="mb-5">
+        <h2>Compra de tokens</h2>
+        <p>Compra tokens que te permitarán acceder a AURAX y realizar transferencias entre billeteras</p>
+      </div>
+
+      <div class="alert alert-info">
+        <ul>
+          <li>Monto mínimo de compra en tokens: 1 tokens.</li>
+          <li>Monto máximo de compra en tokens: 10000 tokens.</li>
+        </ul>
+      </div>
+      <hr>
+
+      <form class="card" [formGroup]="form">
+        <div class="card-body">
+
+          <div class="col-12">
+            <label for="amount" class="form-label">Monto en dólares:</label>
+            <input type="number" class="form-control" id="amount" formControlName="amount" min="0"
+                   [class.ng-invalid]="form.get('amount')?.invalid && form.get('amount')?.touched">
+
+            <div
+              class="alert alert-danger p-1 mt-1"
+              *ngIf="form.get('amount')?.invalid && form.get('amount')?.touched"
+            >Monto requerido</div>
+          </div>
+
+          <div class="col-12">
+              <label for="tokens" class="form-label">Tokens a recibir</label>
+            <input type="number" readonly  class="form-control" id="tokens" formControlName="tokens"
+                   [class.ng-invalid]="form.get('tokens')?.invalid && form.get('tokens')?.touched">
+          </div>
+          <hr>
+          <div class="d-flex justify-content-center">
+            <button
+              type="button"
+              class="btn btn-primary"
+              [disabled]="form.invalid || form.get('amount')?.value <= 0"
+              (click)="submit()">
+              Comprar
+            </button>
+          </div>
+
+        </div>
+      </form>
+    </div>
+    <div class="col-12 col-sm-6">
+      <img src="assets/illustration1.jpg" alt="image" class="img-fluid">
+    </div>
+  </div>
+</div>

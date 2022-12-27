@@ -89,6 +89,8 @@ def transfer_to_user(node, sender_public_key, sender_private_key, receiver_publi
             'node': node,
             'coin_wallet': sender_public_key
         })
+
+        print(sender_account)
         sender_account = json.loads(sender_account.content)
         sender_balance = (json.loads(sender_account))['balance']
 
@@ -113,6 +115,11 @@ def transfer_to_user(node, sender_public_key, sender_private_key, receiver_publi
             node + '/transactions/new', data=rq)
     except Exception as e:
         raise e
+
+
+@app.route('/')
+def api():
+    return jsonify('api works')
 
 
 @app.route('/exchange-rate')
@@ -305,7 +312,6 @@ def get_token_balance(public_key):
 
 
 @app.route('/balance', methods=['POST'])
-@jwt_required()
 def get_balance():
     try:
         form = request.json
