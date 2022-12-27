@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {NodeService} from "../services/node.service";
 import {LoginService} from "../services/login.service";
 
@@ -7,7 +7,17 @@ import {LoginService} from "../services/login.service";
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
-export class HeaderComponent {
+export class HeaderComponent implements OnInit{
+
+    show = false
     constructor(public nodeService: NodeService, public loginService: LoginService) {
     }
+
+    ngOnInit() {
+      this.show = Boolean(window.localStorage.getItem('token'))
+      this.loginService.events?.subscribe((loginStatus: any) => {
+        this.show = loginStatus
+      })
+    }
+
 }

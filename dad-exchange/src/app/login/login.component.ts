@@ -26,6 +26,7 @@ export class LoginComponent implements OnInit{
     try {
       const res: any  = await this.loginService.login(this.form.value)
       window.localStorage.setItem('token', res?.token)
+      this.loginService.events.next(true);
       await this.router.navigate(['/balance'])
     } catch (e) {
       console.log(e)

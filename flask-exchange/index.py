@@ -85,10 +85,12 @@ def get_wallet_private_key(id):
 
 def transfer_to_user(node, sender_public_key, sender_private_key, receiver_public_key, amount, system_tx=False):
     try:
-        sender_account = requests.post('http://10.5.0.5:5001/balance', json={
+        sender_account = requests.post('http://localhost:5001/balance', json={
             'node': node,
             'coin_wallet': sender_public_key
         })
+
+        print(sender_account)
         sender_account = json.loads(sender_account.content)
         sender_balance = (json.loads(sender_account))['balance']
 
@@ -305,7 +307,6 @@ def get_token_balance(public_key):
 
 
 @app.route('/balance', methods=['POST'])
-@jwt_required()
 def get_balance():
     try:
         form = request.json

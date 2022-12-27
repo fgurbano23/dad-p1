@@ -35,6 +35,7 @@ export class TransactionsComponent {
       const userToken: string = window.localStorage.getItem('token') as string
       this.jwt = jwt_decode(userToken)
 
+      console.log(this.jwt)
       const exchangeRate: any = await this.amountCurrency.exchangeRate();
 
       let coinBalance: any = await this.balanceService.coinBalance({
@@ -45,7 +46,7 @@ export class TransactionsComponent {
       this.balance = coinBalance.balance
 
       let users: any = await this.amountCurrency.getBeneficiaries();
-      this.beneficiaryList = users.data;
+      this.beneficiaryList = users.data.filter((users: any) => users.id != this.jwt.sub);
 
       console.log(this.beneficiaryList)
     } catch (e) {
