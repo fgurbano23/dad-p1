@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary" *ngIf="show">
   <div class="container-fluid">
-    <a class="navbar-brand" routerLink="/balance">Navbar</a>
+    <a class="navbar-brand" routerLink="/balance"><img src="assets/aurax.png" alt="logo"></a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -18,11 +18,12 @@
         <li class="nav-item">
           <a class="nav-link" routerLink="/transfer" routerLinkActive="active">Transferir</a>
         </li>
-        <li class="nav-item">
-          <button class="btn btn-outline-dark" (click)="loginService.logout()">Salir</button>
-        </li>
+
       </ul>
 
+      <div class="nav-item ms-auto">
+        <button class="btn btn-danger" (click)="loginService.logout()">Salir</button>
+      </div>
     </div>
   </div>
 </nav>

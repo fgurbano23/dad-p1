@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import {LoginComponent} from "./login/login.component";
-import {RegisterComponent} from "./register/register.component";
-import {TokensComponent} from "./tokens/tokens.component";
-import {TransactionsComponent} from "./transactions/transactions.component";
-import {ExchangeComponent} from "./exchange/exchange.component";
-import {SummaryComponent} from "./summary/summary.component";
+import {LoginComponent} from "./modules/login/login.component";
+import {RegisterComponent} from "./modules/register/register.component";
+import {TokensComponent} from "./modules/tokens/tokens.component";
+import {TransactionsComponent} from "./modules/transactions/transactions.component";
+import {ExchangeComponent} from "./modules/exchange/exchange.component";
+import {SummaryComponent} from "./modules/summary/summary.component";
 import {AuthGuard} from "./guards/auth.guard";
 import {RedirectGuard} from "./guards/redirect.guard";
 

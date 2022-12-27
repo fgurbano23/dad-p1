@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {AmountCurrencyService} from "../services/amount-currency.service";
+import {AmountCurrencyService} from "../../services/amount-currency.service";
 import jwt_decode from "jwt-decode";
 @Component({
   selector: 'app-tokens',

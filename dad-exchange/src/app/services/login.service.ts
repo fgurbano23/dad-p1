@@ -17,6 +17,10 @@ export class LoginService {
     return lastValueFrom(this.http.post(environment.api + '/sign-in', form))
   }
 
+  register(form: any) {
+    return lastValueFrom(this.http.post(environment.api + '/sign-up', form))
+  }
+
   logout() {
     window.localStorage.clear()
     this.events.next(false)

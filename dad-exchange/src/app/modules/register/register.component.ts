@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {LoginService} from "../services/login.service";
+import {LoginService} from "../../services/login.service";
 import {Router} from "@angular/router";
 
 @Component({
@@ -13,6 +13,8 @@ export class RegisterComponent {
 
   constructor(private fb: FormBuilder, private loginService: LoginService, private router: Router) {
     this.form = this.fb.group({
+      name: [ null, [Validators.required]],
+      surname: [ null, [Validators.required]],
       username: [ null, [Validators.required]],
       password: [ null, [Validators.required]]
     })
@@ -23,7 +25,7 @@ export class RegisterComponent {
   }
   async submit() {
     try {
-      const res: any  = await this.loginService.login(this.form.value)
+      const res: any  = await this.loginService.register(this.form.value)
       window.localStorage.setItem('token', res?.token)
       this.loginService.events.next(true);
       await this.router.navigate(['/balance'])

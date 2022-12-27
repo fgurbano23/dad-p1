@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import jwt_decode from "jwt-decode";
-import {NodeService} from "../services/node.service";
-import {BalanceService} from "../services/balance.service";
+import {NodeService} from "../../services/node.service";
+import {BalanceService} from "../../services/balance.service";
 
 @Component({
   selector: 'app-summary',

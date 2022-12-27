@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {AmountCurrencyService} from "../services/amount-currency.service";
+import {AmountCurrencyService} from "../../services/amount-currency.service";
 import jwt_decode from "jwt-decode";
-import {NodeService} from "../services/node.service";
-import {BalanceService} from "../services/balance.service";
+import {NodeService} from "../../services/node.service";
+import {BalanceService} from "../../services/balance.service";
 
 @Component({
   selector: 'app-transactions',
@@ -24,7 +24,7 @@ export class TransactionsComponent {
     const jwt: any = jwt_decode(userToken)
     console.log(jwt)
     this.form = this.fb.group( {
-      amount: [null, [Validators.required]],
+      amount: [null, [Validators.required, Validators.min(0.001)]],
       receiver: [null,  [Validators.required]],
       coin_wallet: jwt?.wallet_public_key
     })
